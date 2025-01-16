@@ -92,8 +92,61 @@ const characters = [
   "/",
 ];
 
-let passwordLength = 12;
+let passwordLength = 15;
 
+let buttonEl = document.getElementById("button");
+let passwordFirstEl = document.getElementById("password-one");
+let passwordSecondEl = document.getElementById("password-two");
+
+function getPassword() {
+  let password = "";
+  for (let i = 0; i < passwordLength; i += 1) {
+    password += characters[Math.floor(Math.random() * characters.length)];
+  }
+  return password;
+}
+
+// console.log(getPassword());
+
+buttonEl.addEventListener("click", function () {
+  passwordFirstEl.textContent = getPassword();
+  passwordSecondEl.textContent = getPassword();
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 // const characters = [

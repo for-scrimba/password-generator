@@ -10,21 +10,109 @@
   --second-family: "Karla", sans-serif;
 }
 
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+h1 {
+  margin: 0;
+}
+
 body {
   font-family: var(--font-family);
   color: var(--gray);
   background-color: var(--background-color);
-  /* scroll-behavior: smooth; */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
 }
 
 .container {
   background-color: var(--second-background-color);
   width: 550px;
   height: 550px;
-  /* margin: 0 auto; */
+}
+
+.wrap {
+  margin-left: 52px;
+  margin-right: 52px;
+  margin-top: 115px;
+}
+
+.title {
+  width: 354px;
+  height: 80px;
+
+  font-family: var(--second-family);
+  font-weight: 800;
+  font-size: 38px;
+  line-height: 100%;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+
+.title-green {
+  color: var(--light-green);
+}
+
+.text {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 140%;
+  margin-top: 10px;
+}
+
+#button {
+  margin-top: 51px;
+  border-radius: 6px;
+  padding: 9px 17px 9px 15px;
+  width: 191px;
+  height: 42px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  background: var(--dark-green);
+
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 150%;
+  color: #fff;
+}
+
+.horizontal-line {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  border: 1px solid #2f3e53;
+  width: 446px;
+  height: 0px;
+}
+
+ul {
+}
+
+.passwords-wrapper {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 200%;
+  text-align: center;
+  color: #55f991;
+}
+
+#password-one,
+#password-two {
+  width: 211px;
+  height: 39px;
+
+  border-radius: 6px;
+  width: 211px;
+  height: 39px;
+
+  background: #273549;
 }

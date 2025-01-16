@@ -3,13 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/latest/normalize.css"
+    />
 
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
     <title>Password Generator</title>
   </head>
   <body>
-    <div class="container"></div>
-    <h1></h1>
+    <div class="container">
+      <div class="wrap">
+        <h1 class="title">
+          Generate a <br />
+          <span class="title-green">random password</span>
+        </h1>
+        <div class="text">Never use an insecure password again</div>
+        <button id="button">Generate passwords</button>
+        <div class="horizontal-line"></div>
+        <ul class="passwords-wrapper">
+          <li>
+            <div id="password-one"></div>
+          </li>
+          <li>
+            <div id="password-two"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
     <script type="module" src="./index.js"></script>
   </body>
 </html>

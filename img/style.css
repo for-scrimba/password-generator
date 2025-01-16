@@ -1,3 +1,14 @@
+:root {
+  --background-color: #1c1c1c;
+  --second-background-color: #1f2937;
+  --white: #fff;
+  --light-green: #4adf86;
+  --dark-green: #10b981;
+
+  --font-family: "Inter", sans-serif;
+  --second-family: "Karla", sans-serif;
+}
+
 body {
   margin: 0;
 }

@@ -1,6 +1,7 @@
 :root {
   --background-color: #1c1c1c;
   --second-background-color: #1f2937;
+  --gray: #d5d4d8;
   --white: #fff;
   --light-green: #4adf86;
   --dark-green: #10b981;
@@ -10,5 +11,20 @@
 }
 
 body {
+  font-family: var(--font-family);
+  color: var(--gray);
+  background-color: var(--background-color);
+  /* scroll-behavior: smooth; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.container {
+  background-color: var(--second-background-color);
+  width: 550px;
+  height: 550px;
+  /* margin: 0 auto; */
 }

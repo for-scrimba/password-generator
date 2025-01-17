@@ -1,20 +1,16 @@
 :root {
   --background-color: #1c1c1c;
-  --second-background-color: #1f2937;
+  --container-background-color: #1f2937;
+  --password-background-color: #273549;
   --gray: #d5d4d8;
   --white: #fff;
-  --light-green: #4adf86;
-  --dark-green: #10b981;
+  --title-green: #4adf86;
+  --button-green: #10b981;
+  --password-green: #55f991;
 
   --font-family: "Inter", sans-serif;
   --second-family: "Karla", sans-serif;
 }
-
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
 
 h1 {
   margin: 0;
@@ -31,7 +27,7 @@ body {
 }
 
 .container {
-  background-color: var(--second-background-color);
+  background-color: var(--container-background-color);
   width: 550px;
   height: 550px;
 }
@@ -55,7 +51,7 @@ body {
 }
 
 .title-green {
-  color: var(--light-green);
+  color: var(--title-green);
 }
 
 .text {
@@ -72,12 +68,12 @@ body {
   width: 191px;
   height: 42px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  background: var(--dark-green);
-
-  font-weight: 500;
+  background: var(--button-green);
+  letter-spacing: 0.02em;
+  font-weight: 600;
   font-size: 15px;
   line-height: 150%;
-  color: #fff;
+  color: var(--white);
 }
 
 .horizontal-line {
@@ -88,9 +84,6 @@ body {
   height: 0px;
 }
 
-ul {
-}
-
 .passwords-wrapper {
   display: flex;
   justify-content: space-between;
@@ -98,21 +91,19 @@ ul {
   padding: 0;
   margin: 0;
   font-family: var(--font-family);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
-  line-height: 200%;
+  line-height: 230%;
   text-align: center;
-  color: #55f991;
+  color: var(--password-green);
 }
 
 #password-one,
 #password-two {
   width: 211px;
   height: 39px;
-
   border-radius: 6px;
   width: 211px;
   height: 39px;
-
-  background: #273549;
+  background: var(--password-background-color);
 }

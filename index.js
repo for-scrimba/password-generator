@@ -1,60 +1,47 @@
-const characters = {
-  upperCase: [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"],
-  lowerCase: [..."abcdefghijklmnopqrstuvwxyz"],
-  numbers: [..."0123456789"],
-  specialCharacters: [..."~`!@#$%^&*()_-+=[]{}|:;<>.?/"],
-};
+import { characters, percents, passwordLength } from "./config.js";
 
-const percents = {
-  upperCasePercent: 0.25,
-  lowerCasePercent: 0.45,
-  numberPercent: 0.15,
-  specialPercent: 0.15,
-};
+function validatePercents(percents) {
+  const total = Object.values(percents).reduce((sum, val) => sum + val, 0);
+  if (Math.abs(total - 1) > 0.001) {
+    throw new Error("The sum of percentages in 'percents' must equal 1.");
+  }
+}
 
-const passwordLength = 15;
+validatePercents(percents);
 
-// const upperSize = Math.floor(passwordLength * percents.upperCasePercent);
-// const lowerSize = Math.floor(passwordLength * percents.lowerCasePercent);
-// const numberSize = Math.floor(passwordLength * percents.numberPercent);
-// const specialSize = Math.floor(passwordLength * percents.specialPercent);
-
-let buttonEl = document.getElementById("button");
-let passwordFirstEl = document.getElementById("password-one");
-let passwordSecondEl = document.getElementById("password-two");
+function calculateCategorySizes(length, percents) {
+  const sizes = {};
+  Object.keys(percents).forEach((element) => {
+    sizes[element] = Math.floor(length * percents[element]);
+  });
+  return sizes;
+}
 
 function getRandomChar(chars) {
   return chars[Math.floor(Math.random() * chars.length)];
 }
 
+function randomArray(array) {
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+  }
+  return array;
+}
+
 function getPassword() {
-  let password = [
-    ...Array(upperSize)
-      .fill()
-      .map(() => getRandomChar(characters.upperCase)),
-    ...Array(lowerSize)
-      .fill()
-      .map(() => getRandomChar(characters.lowerCase)),
-    ...Array(numberSize)
-      .fill()
-      .map(() => getRandomChar(characters.numbers)),
-    ...Array(specialSize)
-      .fill()
-      .map(() => getRandomChar(characters.specialCharacters)),
+  const categorySizes = calculateCategorySizes(passwordLength, percents);
+
+  const categories = [
+    { chars: characters.upperCase, size: categorySizes.upperCasePercent },
+    { chars: characters.lowerCase, size: categorySizes.lowerCasePercent },
+    { chars: characters.numbers, size: categorySizes.numberPercent },
+    { chars: characters.specialCharacters, size: categorySizes.specialPercent },
   ];
-  // let password = [];
-  // for (let i = 0; i < upperSize; i += 1) {
-  //   password.push(getRandomChar(characters.upperCase));
-  // }
-  // for (let i = 0; i < lowerSize; i += 1) {
-  //   password.push(getRandomChar(characters.lowerCase));
-  // }
-  // for (let i = 0; i < numberSize; i += 1) {
-  //   password.push(getRandomChar(characters.numbers));
-  // }
-  // for (let i = 0; i < specialSize; i += 1) {
-  //   password.push(getRandomChar(characters.specialCharacters));
-  // }
+
+  let password = categories.flatMap((category) =>
+    Array.from({ length: category.size }, () => getRandomChar(category.chars))
+  );
 
   while (password.length < passwordLength) {
     password.push(
@@ -67,160 +54,30 @@ function getPassword() {
     );
   }
 
-  function randomArray(array) {
-    for (let i = array.length - 1; i > 0; i -= 1) {
-      const randomIndex = Math.floor(Math.random() * (i + 1));
-      [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
-    }
-    return array;
-  }
-
-  return (password = randomArray(password).join(""));
+  return randomArray(password).join("");
 }
 
-buttonEl.addEventListener("click", function () {
-  passwordFirstEl.textContent = getPassword();
-  passwordSecondEl.textContent = getPassword();
-});
+function generatePassword(elements) {
+  const newPasswords = [getPassword(), getPassword()];
+  elements.passwordFields.forEach(
+    (field, index) => (field.textContent = newPasswords[index])
+  );
+}
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// const characters = [
-//   "A",
-//   "B",
-//   "C",
-//   "D",
-//   "E",
-//   "F",
-//   "G",
-//   "H",
-//   "I",
-//   "J",
-//   "K",
-//   "L",
-//   "M",
-//   "N",
-//   "O",
-//   "P",
-//   "Q",
-//   "R",
-//   "S",
-//   "T",
-//   "U",
-//   "V",
-//   "W",
-//   "X",
-//   "Y",
-//   "Z",
-//   "a",
-//   "b",
-//   "c",
-//   "d",
-//   "e",
-//   "f",
-//   "g",
-//   "h",
-//   "i",
-//   "j",
-//   "k",
-//   "l",
-//   "m",
-//   "n",
-//   "o",
-//   "p",
-//   "q",
-//   "r",
-//   "s",
-//   "t",
-//   "u",
-//   "v",
-//   "w",
-//   "x",
-//   "y",
-//   "z",
-//   "0",
-//   "1",
-//   "2",
-//   "3",
-//   "4",
-//   "5",
-//   "6",
-//   "7",
-//   "8",
-//   "9",
-//   "~",
-//   "`",
-//   "!",
-//   "@",
-//   "#",
-//   "$",
-//   "%",
-//   "^",
-//   "&",
-//   "*",
-//   "(",
-//   ")",
-//   "_",
-//   "-",
-//   "+",
-//   "=",
-//   "{",
-//   "[",
-//   "}",
-//   "]",
-//   ",",
-//   "|",
-//   ":",
-//   ";",
-//   "<",
-//   ">",
-//   ".",
-//   "?",
-//   "/",
-// ];
+function initialize() {
+  const elements = {
+    button: document.getElementById("button"),
+    passwordFields: [
+      document.getElementById("password-one"),
+      document.getElementById("password-two"),
+    ],
+  };
 
-// let passwordLength = 15;
+  if (!elements.button || elements.passwordFields.some((field) => !field)) {
+    throw new Error("Some elements are missing in the DOM.");
+  }
 
-// let buttonEl = document.getElementById("button");
-// let passwordFirstEl = document.getElementById("password-one");
-// let passwordSecondEl = document.getElementById("password-two");
+  elements.button.addEventListener("click", () => generatePassword(elements));
+}
 
-// function getPassword() {
-//   let password = "";
-//   for (let i = 0; i < passwordLength; i += 1) {
-//     password += characters[Math.floor(Math.random() * characters.length)];
-//   }
-//   return password;
-// }
-
-// buttonEl.addEventListener("click", function () {
-//   passwordFirstEl.textContent = getPassword();
-//   passwordSecondEl.textContent = getPassword();
-// });
+initialize();

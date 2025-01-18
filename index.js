@@ -32,12 +32,26 @@ function randomArray(array) {
 function getPassword() {
   const categorySizes = calculateCategorySizes(passwordLength, percents);
 
-  const categories = [
-    { chars: characters.upperCase, size: categorySizes.upperCasePercent },
-    { chars: characters.lowerCase, size: categorySizes.lowerCasePercent },
-    { chars: characters.numbers, size: categorySizes.numberPercent },
-    { chars: characters.specialCharacters, size: categorySizes.specialPercent },
-  ];
+  // const categories = [
+  //   { chars: characters.upperCase, size: categorySizes.upperCasePercent },
+  //   { chars: characters.lowerCase, size: categorySizes.lowerCasePercent },
+  //   { chars: characters.numbers, size: categorySizes.numberPercent },
+  //   { chars: characters.specialCharacters, size: categorySizes.specialPercent },
+  // ];
+  // ==============================================================
+  const categories = Object.entries(characters).map(([key, chars]) => ({
+    chars,
+    size: percents[key + "Percent"],
+  }));
+
+  // ==============================================================
+  // const categoryKeys = ["upperCase", "lowerCase", "numbers", "special"];
+  // const categories = categoryKeys.map((key) => ({
+  //   chars: characters[key],
+  //   size: categorySizes[key + "Percent"],
+  // }));
+
+  //
 
   let password = categories.flatMap((category) =>
     Array.from({ length: category.size }, () => getRandomChar(category.chars))
@@ -49,7 +63,7 @@ function getPassword() {
         ...characters.upperCase,
         ...characters.lowerCase,
         ...characters.numbers,
-        ...characters.specialCharacters,
+        ...characters.special,
       ])
     );
   }

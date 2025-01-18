@@ -2,7 +2,7 @@ export const characters = {
   upperCase: [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"],
   lowerCase: [..."abcdefghijklmnopqrstuvwxyz"],
   numbers: [..."0123456789"],
-  specialCharacters: [..."~`!@#$%^&*()_-+=[]{}|:;<>.?/"],
+  special: [..."~`!@#$%^&*()_-+=[]{}|:;<>.?/"],
 };
 
 export const percents = {

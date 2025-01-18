@@ -12,4 +12,6 @@ export const percents = {
   specialPercent: 0.15,
 };
 
-export const passwordLength = 15;
+export const passwordDefaults = {
+  length: 15,
+};

@@ -35,7 +35,7 @@ body {
 .wrap {
   margin-left: 52px;
   margin-right: 52px;
-  margin-top: 115px;
+  margin-top: 70px;
 }
 
 .title {
@@ -61,8 +61,13 @@ body {
   margin-top: 10px;
 }
 
+#form {
+  margin-top: 40px;
+}
 #button {
-  margin-top: 51px;
+  /* display: block;
+  margin: 0 auto; */
+  margin-top: 40px;
   border-radius: 6px;
   padding: 9px 17px 9px 15px;
   width: 191px;
@@ -86,7 +91,9 @@ body {
 
 .passwords-wrapper {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -100,10 +107,44 @@ body {
 
 #password-one,
 #password-two {
-  width: 211px;
-  height: 39px;
   border-radius: 6px;
-  width: 211px;
+  width: 446px;
   height: 39px;
   background: var(--password-background-color);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#form {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+#password-length {
+  /* width: 50px; */
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 20%;
+  height: 10px;
+  background: var(--gray);
+  border-radius: 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#slider::-webkit-slider-thumb,
+#slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: var(--gray);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#slider-value {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 20px;
+  margin-top: 10px;
 }

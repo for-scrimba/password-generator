@@ -25,6 +25,20 @@
           <span class="title-green">random password</span>
         </h1>
         <div class="text">Never use an insecure password again</div>
+        <form id="form">
+          <label for="password-length">Password Length:</label>
+          <input
+            type="range"
+            id="password-length"
+            min="12"
+            max="40"
+            value="15"
+            step="1"
+            aria-labelledby="password-length"
+          />
+          <span id="slider-value">15</span>
+        </form>
+
         <button id="button">Generate passwords</button>
         <div class="horizontal-line"></div>
         <ul class="passwords-wrapper">

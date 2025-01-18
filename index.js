@@ -1,4 +1,4 @@
-import { characters, percents, passwordLength } from "./config.js";
+import { characters, percents, passwordDefaults } from "./config.js";
 
 function validatePercents(percents) {
   const total = Object.values(percents).reduce((sum, val) => sum + val, 0);
@@ -18,7 +18,14 @@ function calculateCategorySizes(length, percents) {
 }
 
 function getRandomChar(chars) {
-  return chars[Math.floor(Math.random() * chars.length)];
+  if (window.crypto && window.crypto.getRandomValues) {
+    const array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    return chars[array[0] % chars.length];
+  } else {
+    console.warn("Falling back to Math.random for character generation.");
+    return chars[Math.floor(Math.random() * chars.length)];
+  }
 }
 
 function randomArray(array) {
@@ -29,26 +36,20 @@ function randomArray(array) {
   return array;
 }
 
-function getPassword() {
-  const categorySizes = calculateCategorySizes(passwordLength, percents);
+function getPassword(config) {
+  const length = config?.length || passwordDefaults.length;
+  const categorySizes = calculateCategorySizes(length, percents);
 
-  // const categories = [
-  //   { chars: characters.upperCase, size: categorySizes.upperCasePercent },
-  //   { chars: characters.lowerCase, size: categorySizes.lowerCasePercent },
-  //   { chars: characters.numbers, size: categorySizes.numberPercent },
-  //   { chars: characters.specialCharacters, size: categorySizes.specialPercent },
-  // ];
-  // ==============================================================
   const categories = Object.entries(characters).map(([key, chars]) => ({
     chars,
-    size: percents[key + "Percent"],
+    size: categorySizes[key + "Percent"],
   }));
 
   let password = categories.flatMap((category) =>
     Array.from({ length: category.size }, () => getRandomChar(category.chars))
   );
 
-  while (password.length < passwordLength) {
+  while (password.length < length) {
     password.push(
       getRandomChar([
         ...characters.upperCase,
@@ -62,11 +63,19 @@ function getPassword() {
   return randomArray(password).join("");
 }
 
-function generatePassword(elements) {
-  const newPasswords = [getPassword(), getPassword()];
+function generatePassword(elements, config) {
+  const newPasswords = [getPassword(config), getPassword(config)];
   elements.passwordFields.forEach(
     (field, index) => (field.textContent = newPasswords[index])
   );
+}
+
+function updateSliderValue(lengthInput, sliderValue) {
+  sliderValue.textContent = lengthInput.value;
+}
+
+function handleSliderInput(lengthInput, sliderValue) {
+  updateSliderValue(lengthInput, sliderValue);
 }
 
 function initialize() {
@@ -76,13 +85,30 @@ function initialize() {
       document.getElementById("password-one"),
       document.getElementById("password-two"),
     ],
+    lengthInput: document.getElementById("password-length"),
+    sliderValue: document.getElementById("slider-value"),
   };
 
-  if (!elements.button || elements.passwordFields.some((field) => !field)) {
+  if (
+    !elements.button ||
+    elements.passwordFields.some((field) => !field) ||
+    !elements.lengthInput
+  ) {
     throw new Error("Some elements are missing in the DOM.");
   }
 
-  elements.button.addEventListener("click", () => generatePassword(elements));
+  updateSliderValue(elements.lengthInput, elements.sliderValue);
+
+  elements.lengthInput.addEventListener("input", () => {
+    handleSliderInput(elements.lengthInput, elements.sliderValue);
+  });
+
+  elements.button.addEventListener("click", () => {
+    const length =
+      parseInt(elements.lengthInput.value, 10) || passwordDefaults.length;
+    const config = { length };
+    generatePassword(elements, config);
+  });
 }
 
 initialize();
